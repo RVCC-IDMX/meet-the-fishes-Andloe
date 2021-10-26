@@ -10,12 +10,12 @@ var UI = {
             params = {};
         }
         if (params.backgroundColor == undefined)
-            params.backgroundColor = 0xEEEEEE;
+            params.backgroundColor = 0x16a085;
         if (params.textStyle == undefined) {
             params.textStyle = {
                 fontFamily : 'Arial', 
                 fontSize: 24, 
-                fill : 0x000000
+                fill : 0xFFFFFF
             }
         }
 

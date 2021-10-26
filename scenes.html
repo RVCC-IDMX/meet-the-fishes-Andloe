@@ -171,7 +171,7 @@
 
         scene4.addChild(backgroundThree);
 
-    let fish3 = PIXI.Sprite.from("img/snaperfish.png");
+    let fish3 = PIXI.Sprite.from("img/snaperfish2.png");
         fish3.width = 200;
         fish3.height = 100;
         fish3.y = 250;
@@ -213,25 +213,6 @@
         app.stage.addChild(scene1);
     }
 
-    nextButton2.onclick = () => {
-        app.stage.removeChild(scene2);
-        app.stage.addChild(scene3);
-    }
-
-    backButton3.onclick = () => {
-        app.stage.removeChild(scene3);
-        app.stage.addChild(scene2);
-    }
-
-    nextButton3.onclick = () => {
-        app.stage.removeChild(scene3);
-        app.stage.addChild(scene4);
-    }
-
-    backButton4.onclick = () => {
-        app.stage.removeChild(scene4);
-        app.stage.addChild(scene3);
-    }
     /*
 
         Tada! We've implemented a crappy version of Powerpoint... *yay*
@@ -469,19 +450,88 @@
 
     */
 
-    Director.addScene("first",scene1);
-    Director.addScene("second",scene2);
-    //Director.addScene("third",scene3);
+    Director.addScene("first", scene1);
+      Director.addScene("second", scene2);
+      Director.addScene("third", scene3);
+      Director.addScene("fourth", scene4);
 
-    nextButton.onclick = () => {
-        Director.showScene("second");
-    }
+      // First Scene
+      nextButton.onclick = () => {
+        Director.swipe(scene1, scene2);
+      };
 
-    backButton.onclick = () => {
-        Director.showScene("first");
-    }
+      // Second Scene
+      backButton.onclick = () => {
+        Director.fade(scene2, scene1);
+      };
 
-    
+      nextButton2.onclick = () => {
+        Director.swipe(scene2, scene3);
+      };
+
+      // Third Scene
+      backButton3.onclick = () => {
+        Director.fade(scene3, scene2);
+      };
+
+      nextButton3.onclick = () => {
+        Director.swipe(scene3, scene4);
+      };
+
+      // Fourth Scene
+      backButton4.onclick = () => {
+        Director.fade(scene4, scene3);
+      };
+
+    // Buttons Style
+
+
+      async function idleSwim1() {
+                await Animate.to(fish1,{
+                    x:300,y:330,
+                    duration:2000,
+                    easing:Animate.easeInOut
+                });
+                await Animate.to(fish1,{
+                    x:300,y:250,
+                    duration:2000,
+                    easing:Animate.easeInOut
+                });
+                idleSwim1();
+            }
+            idleSwim1();
+
+            async function idleSwim2() {
+                await Animate.to(fish3,{
+                    x:-150,y:250,
+                    duration:1200,
+                    easing:Animate.easeInOut
+                });
+                fish3.scale.x *= -1;
+                await Animate.to(fish3,{
+                    x:800,y:250,
+                    duration:1700,
+                    easing:Animate.easeInOut
+                });
+                fish3.scale.x *= -1;
+                idleSwim2();
+            }
+            idleSwim2();
+
+            async function idleSwim3() {
+                await Animate.to(fish2,{
+                    x:300,y:300,
+                    duration:1200,
+                    easing:Animate.easeInOut
+                });
+                await Animate.to(fish2,{
+                    x:300,y:250,
+                    duration:1200,
+                    easing:Animate.easeInOut
+                });
+                idleSwim3();
+            }
+            idleSwim3();
     /*
         This week's homework!
 
